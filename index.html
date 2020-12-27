@@ -163,8 +163,75 @@
             funcarr=[];
 
         }
-        else if (isNaN(input))
+        else if (input=="+/-")
+        {   
+            if(num!="")
+                numarr.push(num);
+            num="";
+            let temp=-process();
+            console.log(temp);
+            document.querySelector(".screen").innerHTML=""+temp;
+            numarr=[temp];
+            funcarr=[];
+
+        }
+        else if (input=="1/x")
+        {   
+            if(num!="")
+                numarr.push(num);
+            num="";
+            let temp=1/process();
+            console.log(temp);
+            document.querySelector(".screen").innerHTML=""+temp;
+            numarr=[temp];
+            funcarr=[];
+
+        }
+        else if (input=="x^2")
+        {   
+            if(num!="")
+                numarr.push(num);
+            num="";
+            let temp=Math.pow(process(),2);
+            console.log(temp);
+            document.querySelector(".screen").innerHTML=""+temp;
+            numarr=[temp];
+            funcarr=[];
+
+        }
+        else if (input=="sqrt(x)")
+        {   
+            if(num!="")
+                numarr.push(num);
+            num="";
+            let temp=Math.pow(process(),.5);
+            console.log(temp);
+            document.querySelector(".screen").innerHTML=""+temp;
+            numarr=[temp];
+            funcarr=[];
+
+
+        }else if (input=="%")
+        {   
+            if(num!="")
+                numarr.push(num);
+            num="";
+            let temp=process()/100;
+            console.log(temp);
+            document.querySelector(".screen").innerHTML=""+temp;
+            numarr=[temp];
+            funcarr=[];
+
+        }
+
+
+
+
+
+
+        else if ((isNaN(input)&& !(input=="-" && numarr.length==0)) && input!=".")
         {
+            console.log(numarr.length==0);
             funcarr.push(input)
             if(num!="")
                 numarr.push(num);
@@ -188,24 +255,24 @@
 
     function process()
     {
-        let output=parseInt(numarr[0]);
+        let output=parseFloat(numarr[0]);
         for(let a=0; a<funcarr.length; a++)
         {
             if(funcarr[a]=='+')
             {
-                output+=parseInt(numarr[a+1]);
+                output+=parseFloat(numarr[a+1]);
             }
             if(funcarr[a]=='*')
             {
-                output*=parseInt(numarr[a+1]);
+                output*=parseFloat(numarr[a+1]);
             }
             if(funcarr[a]=='-')
             {
-                output-=parseInt(numarr[a+1]);
+                output-=parseFloat(numarr[a+1]);
             }
             if(funcarr[a]=='/')
             {
-                output/=parseInt(numarr[a+1]);
+                output/=parseFloat(numarr[a+1]);
             }
         }
         return output;
