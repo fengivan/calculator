@@ -14,6 +14,10 @@
                 padding:1rem;
                 background:white;
             }
+            .clear
+            {
+                grid-column:2/4;
+            }
             .screen
             {
                 grid-column: 1/5;
@@ -41,7 +45,33 @@
     <div class = "screen">
         
     </div>
-    
+        <div data-key= "%" class= "key">
+            %
+        </div>
+        <div data-key= "clear" class= "key clear">
+            C
+        </div>
+        <div data-key= "backspace" class= "key">
+            backspace
+        </div>
+
+
+
+        <div data-key= "1/x" class= "key">
+            1/x
+        </div>
+        <div data-key= "x^2" class= "key">
+            x^2
+        </div>
+        <div data-key= "sqrt(x)" class= "key">
+            sqrt(x)
+        </div>
+        <div data-key= "/" class= "key">
+            /
+        </div>
+
+
+
         <div data-key= "9" class= "key">
             9
         </div>
@@ -72,7 +102,7 @@
         <div data-key= "2" class= "key">
             2
         </div>
-        <div data-key= "2" class= "key">
+        <div data-key= "3" class= "key">
             3
         </div>
         <div data-key= "+" class= "key">
@@ -103,20 +133,95 @@
 <script>
 
     
-
-
+    let input="";
+    //process("500+500");
+    let numarr=[];
+    let funcarr=[];
+    let num="";
     var keys = document.querySelectorAll('.key');
-    keys.forEach(key => key.addEventListener('mousedown', color));
+    keys.forEach(key => key.addEventListener('mousedown', click));
     keys.forEach(key => key.addEventListener('mouseup', rmcolor));
-    function color(i)
+    function click(i)
     {
         this.classList.add('clicked');
-        console.log(this.dataset.key);
-        document.querySelector(".screen").innerHTML+=""+this.dataset.key;
+        let input=this.dataset.key;
+
+        
+        if(input=="clear")
+        {
+            clear();
+        }
+        else if (input=="=")
+        {   
+            if(num!="")
+                numarr.push(num);
+            num="";
+            let temp=process();
+            console.log(temp);
+            document.querySelector(".screen").innerHTML=""+temp;
+            numarr=[temp];
+            funcarr=[];
+
+        }
+        else if (isNaN(input))
+        {
+            funcarr.push(input)
+            if(num!="")
+                numarr.push(num);
+            num="";
+            document.querySelector(".screen").innerHTML+=""+input;
+        }
+        else 
+        {
+            num+=input;
+            document.querySelector(".screen").innerHTML+=""+input;
+        }
+        console.log(numarr);
+        console.log(funcarr);
+
+
+
+
+
+
+    }
+
+    function process()
+    {
+        let output=parseInt(numarr[0]);
+        for(let a=0; a<funcarr.length; a++)
+        {
+            if(funcarr[a]=='+')
+            {
+                output+=parseInt(numarr[a+1]);
+            }
+            if(funcarr[a]=='*')
+            {
+                output*=parseInt(numarr[a+1]);
+            }
+            if(funcarr[a]=='-')
+            {
+                output-=parseInt(numarr[a+1]);
+            }
+            if(funcarr[a]=='/')
+            {
+                output/=parseInt(numarr[a+1]);
+            }
+        }
+        return output;
     }
     function rmcolor(i)
     {
         this.classList.remove('clicked');
+    }
+    function clear()
+    {
+        document.querySelector(".screen").innerHTML="";
+        input="";
+        //process("500+500");
+        numarr=[];
+        funcarr=[];
+        num="";
     }
 
 
