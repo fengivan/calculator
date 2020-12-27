@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html>
+    <head> 
+        <meta charset = "UTF-8">
+        <Title> Calculator</Title>
+        <style>
+            .container
+            {
+                display:grid;
+                grid-template-columns: repeat(4, 1fr);
+                height:20vw;
+                width: 50%;
+                padding:1rem;
+                background:white;
+            }
+            .screen
+            {
+                grid-column: 1/5;
+                text-align:right;
+            }
+            .key{
+                margin:1px;
+                background-color:grey;
+                text-align:center;
+                
+            }
+          
+            .clicked
+            {
+                background-color:darkgrey;
+            }
+            
+
+
+        </style>
+    </head>
+
+<body>
+<div class= "container">
+    <div class = "screen">
+        
+    </div>
+    
+        <div data-key= "9" class= "key">
+            9
+        </div>
+        <div data-key= "8" class= "key">
+            8
+        </div>
+        <div data-key= "7" class= "key">
+            7
+        </div>
+        <div data-key= "*" class= "key">
+            *
+        </div>
+        <div data-key= "4" class= "key">
+            4
+        </div>
+        <div data-key= "5" class= "key">
+            5
+        </div>
+        <div data-key= "6" class= "key">
+            6
+        </div>
+        <div data-key= "-" class= "key">
+            -
+        </div>
+        <div data-key= "1" class= "key">
+            1
+        </div>
+        <div data-key= "2" class= "key">
+            2
+        </div>
+        <div data-key= "2" class= "key">
+            3
+        </div>
+        <div data-key= "+" class= "key">
+            +
+        </div>
+        <div data-key= "+/-" class= "key">
+            +/-
+        </div>
+        <div data-key= "0" class= "key">
+            0
+        </div>
+        <div data-key= "." class= "key">
+            .
+        </div>
+        <div data-key= "=" class= "key">
+            =
+        </div>
+
+    </div>
+
+    
+    
+
+
+
+
+</body>
+<script>
+
+    
+
+
+    var keys = document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('mousedown', color));
+    keys.forEach(key => key.addEventListener('mouseup', rmcolor));
+    function color(i)
+    {
+        this.classList.add('clicked');
+        console.log(this.dataset.key);
+        document.querySelector(".screen").innerHTML+=""+this.dataset.key;
+    }
+    function rmcolor(i)
+    {
+        this.classList.remove('clicked');
+    }
+
+
+</script>
+
+</html>
