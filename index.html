@@ -3,40 +3,7 @@
     <head> 
         <meta charset = "UTF-8">
         <Title> Calculator</Title>
-        <style>
-            .container
-            {
-                display:grid;
-                grid-template-columns: repeat(4, 1fr);
-                height:20vw;
-                width: 50%;
-                padding:1rem;
-                background:white;
-            }
-            .clear
-            {
-                grid-column:2/4;
-            }
-            .screen
-            {
-                grid-column: 1/5;
-                text-align:right;
-                font-size: 150%;
-                margin:1px;
-                border-style:solid;
-            }
-            .key{
-                margin:1px;
-                background-color:darkgray;
-                text-align:center;
-                font-size: 150%;
-                border-style:solid;
-            }
-            .clicked
-            {
-                background-color:lightgray;
-            }
-        </style>
+        <link rel = "stylesheet" href="style.css">
     </head>
 <body>
 <div class= "container">
@@ -50,7 +17,7 @@
             C
         </div>
         <div data-key= "backspace" class= "key">
-            backspace
+            Backspace
         </div>
         <div data-key= "1/x" class= "key">
             1/x
@@ -115,155 +82,5 @@
     </div>
 
 </body>
-<script>
-    let init=true;
-    let input="";
-    let numarr=[];
-    let funcarr=[];
-    let num="";
-    var keys = document.querySelectorAll('.key');
-    keys.forEach(key => key.addEventListener('mousedown', click));
-    keys.forEach(key => key.addEventListener('mouseup', rmcolor));
-    function click(i)
-    {
-        if(init)
-        {
-            init=false;
-            document.querySelector(".screen").innerHTML="";
-        }
-        this.classList.add('clicked');
-        let input=this.dataset.key;
-
-        if(input=="clear")
-        {
-            clear();
-        }
-        else if (input=="=")
-        {   
-            if(num!="")
-                numarr.push(num);
-            num="";
-            let temp=process();
-            document.querySelector(".screen").innerHTML=""+temp;
-            numarr=[temp];
-            funcarr=[];
-        }
-        else if (input=="+/-")
-        {   
-            if(num!="")
-                numarr.push(num);
-            num="";
-            let temp=-process();
-            document.querySelector(".screen").innerHTML=""+temp;
-            numarr=[temp];
-            funcarr=[];
-        }
-        else if (input=="1/x")
-        {   
-            if(num!="")
-                numarr.push(num);
-            num="";
-            let temp=1/process();
-            document.querySelector(".screen").innerHTML=""+temp;
-            numarr=[temp];
-            funcarr=[];
-        }
-        else if (input=="x^2")
-        {   
-            if(num!="")
-                numarr.push(num);
-            num="";
-            let temp=Math.pow(process(),2);
-            document.querySelector(".screen").innerHTML=""+temp;
-            numarr=[temp];
-            funcarr=[];
-        }
-        else if (input=="sqrt(x)")
-        {   
-            if(num!="")
-                numarr.push(num);
-            num="";
-            let temp=Math.pow(process(),.5);
-            document.querySelector(".screen").innerHTML=""+temp;
-            numarr=[temp];
-            funcarr=[];
-        }
-
-        else if (input=="backspace")
-        {   
-            if(num=="")
-            {
-                clear();
-            }
-            else{
-                num=num.substring(0,num.length-1);
-                document.querySelector(".screen").innerHTML=document.querySelector(".screen").innerHTML.substring(0,document.querySelector(".screen").innerHTML.length-1);
-            }
-        }
-        
-        else if (input=="%")
-        {   
-            if(num!="")
-                numarr.push(num);
-            num="";
-            let temp=process()/100;
-            document.querySelector(".screen").innerHTML=""+temp;
-            numarr=[temp];
-            funcarr=[];
-        }
-        else if ((isNaN(input)&& !(input=="-" && numarr.length==0 && num.length==0)) && input!=".")
-        {
-            funcarr.push(input)
-            if(num!="")
-                numarr.push(num);
-            num="";
-            document.querySelector(".screen").innerHTML+=""+input;
-        }
-        else 
-        {
-            num+=input;
-            document.querySelector(".screen").innerHTML+=""+input;
-        }
-    }
-
-    function process()
-    {
-        let output=parseFloat(numarr[0]);
-        for(let a=0; a<funcarr.length; a++)
-        {
-            if(funcarr[a]=='*')
-                output*=parseFloat(numarr[a+1]);
-            else if(funcarr[a]=='-')
-                output-=parseFloat(numarr[a+1]);
-            else if(funcarr[a]=='/')
-                output/=parseFloat(numarr[a+1]);
-            else
-                output+=parseFloat(numarr[a+1]);
-        }
-
-        if(funcarr.length==0)
-        {
-            let sum=0;
-            for(let x=0; x<numarr.length; x++)
-            {
-                sum+=parseFloat(numarr[x]);
-            }
-            return sum;
-        }
-        return output;
-    }
-    function rmcolor(i)
-    {
-        this.classList.remove('clicked');
-    }
-    function clear()
-    {
-        document.querySelector(".screen").innerHTML="0";
-        input="";
-        numarr=[];
-        funcarr=[];
-        num="";
-        init=true;
-    }
-</script>
+<script src="script.js"></script>
 </html>

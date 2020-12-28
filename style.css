@@ -1,0 +1,32 @@
+.container
+{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    height:20vw;
+    width: 50%;
+    padding:1rem;
+    background:white;
+}
+.clear
+{
+    grid-column:2/4;
+}
+.screen
+{
+    grid-column: 1/5;
+    text-align:right;
+    font-size: 300%;
+    margin:1px;
+    border-style:solid;
+}
+.key{
+    margin:1px;
+    background-color:darkgray;
+    text-align:center;
+    font-size: 150%;
+    border-style:solid;
+}
+.clicked
+{
+    background-color:lightgray;
+}
